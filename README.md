@@ -144,11 +144,11 @@ We welcome contributions to Nirikshan. Please follow these guidelines:
 
 This platform was developed as a final-year academic project by:
 
-* Member 1 (Developer / Lead)
-* Member 2 (Frontend Developer)
-* Member 3 (Backend Developer)
-* Member 4 (Database Architect)
-* Member 5 (GIS / Map Integration Analyst)
+* Ashmit
+* Sujit
+* Samir
+* Nischal
+* Pritam
 
 ## License
 
