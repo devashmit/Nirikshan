@@ -5,6 +5,7 @@ import PromiseDetail from './pages/PromiseDetail';
 import ModeratorDashboard from './pages/ModeratorDashboard';
 import CreatePromise from './pages/CreatePromise';
 import InteractiveMap from './pages/InteractiveMap';
+import RepresentativeReportCard from './pages/RepresentativeReportCard';
 import { authAPI } from './api';
 import { ShieldCheck, UserCheck, LogOut, Loader, Award } from 'lucide-react';
 
@@ -166,6 +167,7 @@ export default function App() {
             <Route path="/promises/:id" element={<PromiseDetail user={user} />} />
             <Route path="/promises/new" element={<CreatePromise />} />
             <Route path="/moderation" element={<ModeratorDashboard />} />
+            <Route path="/representative/:id" element={<RepresentativeReportCard />} />
           </Routes>
         </main>
 
