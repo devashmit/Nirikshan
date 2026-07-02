@@ -12,6 +12,10 @@
   --color-status-fulfilled: #4F6B45;
   --color-status-delayed: #8C6A32;
   --color-status-broken: #6E4438;
+  
+  --color-rhododendron-green: #3E5E3D;
+  --color-turmeric-clay: #C48E38;
+  --color-charred-brick: #8B4032;
 }
 
 @layer base {
