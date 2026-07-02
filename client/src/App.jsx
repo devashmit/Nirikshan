@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import PromiseDetail from './pages/PromiseDetail';
 import ModeratorDashboard from './pages/ModeratorDashboard';
 import CreatePromise from './pages/CreatePromise';
+import InteractiveMap from './pages/InteractiveMap';
 import { authAPI } from './api';
 import { ShieldCheck, UserCheck, LogOut, Loader, Award } from 'lucide-react';
 
@@ -96,6 +97,10 @@ export default function App() {
               <Link to="/" className="text-xs uppercase tracking-wider font-semibold hover:text-temple-brass transition-colors">
                 Promises Feed
               </Link>
+
+              <Link to="/map" className="text-xs uppercase tracking-wider font-semibold hover:text-temple-brass transition-colors">
+                Interactive Map
+              </Link>
               
               {user && (user.role === 'moderator' || user.role === 'admin') && (
                 <Link
@@ -157,6 +162,7 @@ export default function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Dashboard user={user} />} />
+            <Route path="/map" element={<InteractiveMap />} />
             <Route path="/promises/:id" element={<PromiseDetail user={user} />} />
             <Route path="/promises/new" element={<CreatePromise />} />
             <Route path="/moderation" element={<ModeratorDashboard />} />
