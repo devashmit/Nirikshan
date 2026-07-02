@@ -3,6 +3,8 @@ import { promisesAPI } from '../api';
 import PromiseCard from '../components/PromiseCard';
 import { Search, Filter, RefreshCw, PlusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import BudgetVisualiser from '../components/visualizations/BudgetVisualiser';
+import ComplaintHeatmap from '../components/visualizations/ComplaintHeatmap';
 
 export default function Dashboard({ user }) {
   const [promises, setPromises] = useState([]);
@@ -65,6 +67,12 @@ export default function Dashboard({ user }) {
           Nirikshan (निरीक्षण) provides tools to track official public promises, evaluate progress, 
           and check representative profiles for transparency across Nepal.
         </p>
+      </div>
+
+      {/* Analytics Visualizations */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <BudgetVisualiser />
+        <ComplaintHeatmap />
       </div>
 
       {/* Control Panel / Filters */}
