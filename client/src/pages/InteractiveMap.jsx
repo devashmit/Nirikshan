@@ -134,7 +134,7 @@ export default function InteractiveMap() {
         fillColor: fillColor,
         weight: isSelected ? 2.5 : 1,
         opacity: 1,
-        color: isSelected ? '#9C7A3C' : '#F3EFE4', // Temple Brass outline for selected, Himalayan Mist for normal
+        color: isSelected ? '#9C7A3C' : '#F3EFE4',
         fillOpacity: mapMode === 'constituency' ? (isSelected ? 0.95 : 0.75) : (isSelected ? 0.9 : 0.7),
         dashArray: isSelected ? '' : '3',
       };
@@ -179,7 +179,7 @@ export default function InteractiveMap() {
           const l = e.target;
           l.setStyle({
             weight: 2.5,
-            color: '#9C7A3C', // Temple Brass outline on hover
+            color: '#9C7A3C',
             fillOpacity: mapMode === 'constituency' ? 0.95 : 0.85,
           });
           l.bringToFront();
@@ -245,42 +245,89 @@ export default function InteractiveMap() {
     return null;
   }, [mapMode, selectedConstituencyId, districtConstituencies, representativesList]);
 
-  // Search logic stub (to be refactored in next commit)
-  const allDistrictsList = useMemo(() => {
-    return districtsList.map(d => d.name).sort();
-  }, [districtsList]);
-
-  const filteredDistricts = useMemo(() => {
+  // Combined typeahead suggestions (districts and constituencies)
+  const filteredSuggestions = useMemo(() => {
     if (!searchQuery) return [];
-    return allDistrictsList.filter(d => 
-      d.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0, 5);
-  }, [searchQuery, allDistrictsList]);
-
-  const handleSearchSelect = (districtName) => {
-    setSelectedDistrict(districtName);
-    setSearchQuery('');
-    setSelectedConstituencyId(null);
+    const query = searchQuery.toLowerCase().trim();
     
-    if (geojsonLayerRef.current && leafletMapInstance.current) {
-      const map = leafletMapInstance.current;
-      geojsonLayerRef.current.eachLayer((layer) => {
-        if (layer.feature.properties.DISTRICT.toUpperCase() === districtName.toUpperCase()) {
-          map.fitBounds(layer.getBounds(), {
-            padding: [50, 50],
-            maxZoom: 9,
-            animate: true,
-            duration: 0.6
+    // Matched Districts
+    const matchedDistricts = districtsList
+      .filter(d => d.name.toLowerCase().includes(query))
+      .map(d => ({
+        id: `dist-${d.id}`,
+        name: d.name,
+        type: 'district',
+        label: `${d.name} (District)`,
+        data: d
+      }));
+      
+    // Matched Constituencies
+    const matchedConstituencies = constituenciesList
+      .filter(c => c.name.toLowerCase().includes(query) || c.id.toLowerCase().includes(query))
+      .map(c => {
+        const dist = districtsList.find(d => d.id === c.districtId);
+        return {
+          id: `const-${c.id}`,
+          name: c.name,
+          type: 'constituency',
+          label: `${c.name} (${dist ? dist.name : ''})`,
+          data: c
+        };
+      });
+      
+    return [...matchedDistricts, ...matchedConstituencies].slice(0, 8);
+  }, [searchQuery, districtsList, constituenciesList]);
+
+  const handleSearchSelect = (item) => {
+    setSearchQuery('');
+    
+    if (item.type === 'district') {
+      const distName = item.name;
+      setSelectedDistrict(distName);
+      setSelectedConstituencyId(null);
+      
+      if (geojsonLayerRef.current && leafletMapInstance.current) {
+        const map = leafletMapInstance.current;
+        geojsonLayerRef.current.eachLayer((layer) => {
+          if (layer.feature.properties.DISTRICT.toUpperCase() === distName.toUpperCase()) {
+            map.fitBounds(layer.getBounds(), {
+              padding: [50, 50],
+              maxZoom: 9,
+              animate: true,
+              duration: 0.6
+            });
+          }
+        });
+      }
+    } else if (item.type === 'constituency') {
+      const constituency = item.data;
+      const district = districtsList.find(d => d.id === constituency.districtId);
+      if (district) {
+        setSelectedDistrict(district.name);
+        setSelectedConstituencyId(constituency.id);
+        setMapMode('constituency'); // Automatically switch to constituency view
+        
+        if (geojsonLayerRef.current && leafletMapInstance.current) {
+          const map = leafletMapInstance.current;
+          geojsonLayerRef.current.eachLayer((layer) => {
+            if (layer.feature.properties.DISTRICT.toUpperCase() === district.name.toUpperCase()) {
+              map.fitBounds(layer.getBounds(), {
+                padding: [50, 50],
+                maxZoom: 9,
+                animate: true,
+                duration: 0.6
+              });
+            }
           });
         }
-      });
+      }
     }
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (filteredDistricts.length > 0) {
-      handleSearchSelect(filteredDistricts[0]);
+    if (filteredSuggestions.length > 0) {
+      handleSearchSelect(filteredSuggestions[0]);
     }
   };
 
@@ -351,13 +398,13 @@ export default function InteractiveMap() {
           </p>
         </div>
 
-        {/* Search Bar */}
+        {/* Search Bar with autocomplete typeahead */}
         <div className="w-full lg:w-80 relative">
           <form onSubmit={handleSearchSubmit}>
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search District..."
+                placeholder="Search District or Constituency..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-weather-stone border border-dust-beige text-slate-basalt py-2.5 pl-3 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-temple-brass rounded-sm shadow-inner placeholder:text-slate-basalt/50"
@@ -371,15 +418,18 @@ export default function InteractiveMap() {
             </div>
           </form>
 
-          {searchQuery && filteredDistricts.length > 0 && (
+          {searchQuery && filteredSuggestions.length > 0 && (
             <div className="absolute z-[1000] left-0 right-0 mt-1 bg-himalayan-mist border border-dust-beige shadow-lg rounded-sm overflow-hidden">
-              {filteredDistricts.map((d) => (
+              {filteredSuggestions.map((suggestion) => (
                 <button
-                  key={d}
-                  onClick={() => handleSearchSelect(d)}
-                  className="w-full text-left px-4 py-2 text-sm text-slate-basalt hover:bg-weather-stone transition-colors font-medium border-b border-dust-beige/20 last:border-0"
+                  key={suggestion.id}
+                  onClick={() => handleSearchSelect(suggestion)}
+                  className="w-full text-left px-4 py-2 text-sm text-slate-basalt hover:bg-weather-stone transition-colors font-medium border-b border-dust-beige/20 last:border-0 flex justify-between items-center"
                 >
-                  {d}
+                  <span className="font-semibold text-pagoda-wood">{suggestion.name}</span>
+                  <span className="text-[10px] text-slate-basalt/60 bg-weather-stone/50 px-2 py-0.5 rounded-sm capitalize">
+                    {suggestion.type}
+                  </span>
                 </button>
               ))}
             </div>
