@@ -32,6 +32,8 @@ export default function InteractiveMap() {
   const [selectedConstituencyId, setSelectedConstituencyId] = useState(null);
   const [hoveredFeatureName, setHoveredFeatureName] = useState(null);
   const [geoJsonData, setGeoJsonData] = useState(null);
+  const [districtsList, setDistrictsList] = useState([]);
+  const [constituenciesList, setConstituenciesList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Real data state
@@ -67,6 +69,45 @@ export default function InteractiveMap() {
         setLoading(false);
       });
   }, []);
+
+  // Map representation data
+  const districtDataMap = useMemo(() => {
+    const map = new Map();
+    districtsList.forEach((district) => {
+      const matched = constituenciesList.filter(
+        (c) => c.mapIdentifier === district.name.toUpperCase()
+      );
+
+      map.set(district.name.toUpperCase(), {
+        id: district.id,
+        name: district.name,
+        province: district.province,
+        cdo: {
+          name: district.cdoName || 'Pending Appointment',
+          phone: district.daoContact || 'N/A',
+          email: `cdo.${district.name.toLowerCase().replace(/[^a-z0-9]/g, '')}@moha.gov.np`,
+          office: district.daoAddress || 'HQ & Address Pending',
+          cdoPhoto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=60'
+        },
+        constituencies: matched.map((c) => ({
+          id: c.id,
+          name: c.name,
+          winner: c.winnerRepresentative?.name || 'Vacant',
+          party: c.winnerRepresentative?.party || 'Independent',
+          votes: c.voteCount || 'pending_verification',
+          margin: c.victoryMargin || 'pending_verification',
+          promisesCount: 0,
+          progress: 0
+        }))
+      });
+    });
+    return map;
+  }, [districtsList, constituenciesList]);
+
+  const getDistrictDataLocal = (districtName) => {
+    if (!districtName) return null;
+    return districtDataMap.get(districtName.toUpperCase().trim());
+  };
 
   // Initialize Map
   useEffect(() => {
@@ -465,6 +506,9 @@ export default function InteractiveMap() {
                   Constituency Results
                 </button>
               </div>
+              <span className="text-[9px] text-temple-brass bg-temple-brass/10 border border-temple-brass/30 px-2 py-1.5 rounded-sm font-sans tracking-wide">
+                Results as of March 2026 General Election
+              </span>
             </div>
 
             <div className="flex items-center gap-1.5 text-temple-brass hover:text-temple-brass/90 transition-colors">
