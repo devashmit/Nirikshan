@@ -132,9 +132,9 @@ export default function InteractiveMap() {
 
       return {
         fillColor: fillColor,
-        weight: isSelected ? 3 : 1,
+        weight: isSelected ? 2.5 : 1,
         opacity: 1,
-        color: isSelected ? '#2E2418' : '#F3EFE4',
+        color: isSelected ? '#9C7A3C' : '#F3EFE4', // Temple Brass outline for selected, Himalayan Mist for normal
         fillOpacity: mapMode === 'constituency' ? (isSelected ? 0.95 : 0.75) : (isSelected ? 0.9 : 0.7),
         dashArray: isSelected ? '' : '3',
       };
@@ -178,8 +178,8 @@ export default function InteractiveMap() {
         mouseover: (e) => {
           const l = e.target;
           l.setStyle({
-            weight: 3,
-            color: '#9C7A3C',
+            weight: 2.5,
+            color: '#9C7A3C', // Temple Brass outline on hover
             fillOpacity: mapMode === 'constituency' ? 0.95 : 0.85,
           });
           l.bringToFront();
@@ -284,6 +284,61 @@ export default function InteractiveMap() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-sans">
+        {/* Header Skeleton */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 border-b border-dust-beige/40 pb-6">
+          <div className="space-y-2">
+            <div className="h-8 w-80 bg-weather-stone rounded-sm animate-shimmer"></div>
+            <div className="h-4 w-96 bg-weather-stone/60 rounded-sm animate-shimmer"></div>
+          </div>
+          <div className="h-10 w-80 bg-weather-stone rounded-sm animate-shimmer"></div>
+        </div>
+
+        {/* Grid Skeleton */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 flex flex-col gap-4">
+            <div className="h-12 w-full bg-weather-stone/50 rounded-sm animate-shimmer"></div>
+            <div className="h-[480px] w-full bg-weather-stone/20 border border-dashed border-dust-beige rounded-sm flex flex-col items-center justify-center text-slate-basalt/50 font-serif">
+              <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-temple-brass rounded-full mb-4"></div>
+              <p>Loading Cartographic Outlines...</p>
+            </div>
+          </div>
+
+          {/* Sidebar Dossier Skeleton */}
+          <div className="bg-himalayan-mist border-2 border-dust-beige p-6 relative rounded-sm shadow-md flex flex-col justify-between h-[544px] overflow-hidden">
+            <div className="space-y-6">
+              <div className="flex flex-col items-center border-b border-dust-beige/80 pb-4 mb-5 space-y-2">
+                <div className="w-10 h-10 rounded-full bg-weather-stone animate-shimmer"></div>
+                <div className="h-3 w-40 bg-weather-stone animate-shimmer"></div>
+                <div className="h-6 w-32 bg-weather-stone animate-shimmer"></div>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 bg-weather-stone p-4 border border-dust-beige/50 rounded-sm">
+                  <div className="w-12 h-12 rounded-full bg-weather-stone/80 animate-shimmer"></div>
+                  <div className="flex-grow space-y-2">
+                    <div className="h-3 w-20 bg-weather-stone/80 animate-shimmer"></div>
+                    <div className="h-4 w-40 bg-weather-stone/80 animate-shimmer"></div>
+                  </div>
+                </div>
+
+                <div className="space-y-2.5">
+                  <div className="h-12 w-full bg-weather-stone/30 border border-dust-beige/20 rounded-sm animate-shimmer"></div>
+                  <div className="h-12 w-full bg-weather-stone/30 border border-dust-beige/20 rounded-sm animate-shimmer"></div>
+                  <div className="h-12 w-full bg-weather-stone/30 border border-dust-beige/20 rounded-sm animate-shimmer"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-12 w-full bg-weather-stone rounded-sm animate-shimmer mt-auto"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-sans">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 border-b border-dust-beige/40 pb-6">
@@ -309,7 +364,7 @@ export default function InteractiveMap() {
               />
               <button
                 type="submit"
-                className="absolute right-3 top-3 text-slate-basalt/60 hover:text-temple-brass"
+                className="absolute right-3 top-3 text-slate-basalt/60 hover:text-temple-brass transition-colors"
               >
                 <Search className="w-4 h-4" />
               </button>
@@ -335,6 +390,7 @@ export default function InteractiveMap() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 flex flex-col gap-4">
           <div className="flex justify-between items-center bg-weather-stone/30 border border-dust-beige/50 p-3 rounded-sm text-xs font-semibold uppercase tracking-wider text-slate-basalt">
+            {/* Toggle Switch */}
             <div className="flex items-center gap-3">
               <span className="text-[10px] text-slate-basalt/80">Mode:</span>
               <div className="bg-pagoda-wood p-0.5 rounded-full flex relative shadow-inner">
@@ -342,7 +398,7 @@ export default function InteractiveMap() {
                   onClick={() => setMapMode('district')}
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                     mapMode === 'district'
-                      ? 'bg-temple-brass text-pagoda-wood shadow-md font-bold'
+                      ? 'bg-temple-brass text-pagoda-wood shadow-[0_0_12px_rgba(156,122,60,0.6)] font-bold'
                       : 'text-himalayan-mist/70 hover:text-himalayan-mist'
                   }`}
                 >
@@ -352,7 +408,7 @@ export default function InteractiveMap() {
                   onClick={() => setMapMode('constituency')}
                   className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                     mapMode === 'constituency'
-                      ? 'bg-temple-brass text-pagoda-wood shadow-md font-bold'
+                      ? 'bg-temple-brass text-pagoda-wood shadow-[0_0_12px_rgba(156,122,60,0.6)] font-bold'
                       : 'text-himalayan-mist/70 hover:text-himalayan-mist'
                   }`}
                 >
@@ -361,37 +417,30 @@ export default function InteractiveMap() {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 text-temple-brass">
+            <div className="flex items-center gap-1.5 text-temple-brass hover:text-temple-brass/90 transition-colors">
               <MapPin className="w-3.5 h-3.5" />
               <span>{hoveredFeatureName || selectedDistrict || 'Hover over map'}</span>
             </div>
           </div>
 
-          {loading ? (
-            <div className="h-[480px] w-full bg-weather-stone/20 border border-dashed border-dust-beige flex flex-col items-center justify-center text-slate-basalt/50 font-serif">
-              <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-temple-brass rounded-full mb-4"></div>
-              <p>Loading Cartographic Outlines...</p>
-            </div>
-          ) : (
-            <div className="relative h-[480px] w-full border border-dust-beige shadow-sm bg-[#F3EFE4] overflow-hidden rounded-sm">
-              <div ref={mapRef} className="h-full w-full" />
-              <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-15 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-50 via-amber-200 to-amber-950 z-[900]" />
-              
-              {mapMode === 'constituency' && (
-                <div className="absolute bottom-4 left-4 z-[999] bg-himalayan-mist/95 backdrop-blur-sm border border-dust-beige/80 p-3 rounded-sm shadow-md text-[10px] font-sans text-slate-basalt">
-                  <h4 className="font-bold border-b border-dust-beige pb-1 mb-2 uppercase tracking-wide">Winning Party</h4>
-                  <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
-                    {Object.values(PARTIES).map(p => (
-                      <div key={p.short} className="flex items-center gap-1.5">
-                        <span className="w-3 h-3 block border border-black/10 rounded-sm" style={{ backgroundColor: p.color }} />
-                        <span className="font-semibold">{p.short}</span>
-                      </div>
-                    ))}
-                  </div>
+          <div className="relative h-[480px] w-full border border-dust-beige shadow-sm bg-[#F3EFE4] overflow-hidden rounded-sm">
+            <div ref={mapRef} className="h-full w-full" />
+            <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-15 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-50 via-amber-200 to-amber-950 z-[900]" />
+            
+            {mapMode === 'constituency' && (
+              <div className="absolute bottom-4 left-4 z-[999] bg-himalayan-mist/95 backdrop-blur-sm border border-dust-beige/80 p-3 rounded-sm shadow-md text-[10px] font-sans text-slate-basalt">
+                <h4 className="font-bold border-b border-dust-beige pb-1 mb-2 uppercase tracking-wide">Winning Party</h4>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+                  {Object.values(PARTIES).map(p => (
+                    <div key={p.short} className="flex items-center gap-1.5">
+                      <span className="w-3 h-3 block border border-black/10 rounded-sm" style={{ backgroundColor: p.color }} />
+                      <span className="font-semibold">{p.short}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Side Panel Details */}
@@ -403,7 +452,7 @@ export default function InteractiveMap() {
             <div className="relative z-10">
               <div className="text-center border-b border-dust-beige/80 pb-4 mb-5">
                 <div className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-dust-beige/60 bg-weather-stone/40 mb-2">
-                  <Landmark className="w-5 h-5 text-temple-brass" />
+                  <Landmark className="w-5 h-5 text-temple-brass animate-pulse" />
                 </div>
                 <span className="block text-[10px] uppercase tracking-widest text-slate-basalt/60 font-semibold mb-1">
                   OFFICIAL GOVERNMENT DOSSIER
@@ -415,8 +464,8 @@ export default function InteractiveMap() {
 
               {selectedDistrictRecord ? (
                 mapMode === 'district' ? (
-                  <div className="space-y-4 font-serif">
-                    <div className="bg-weather-stone p-4 border border-dust-beige/50 rounded-sm flex items-center gap-4">
+                  <div className="space-y-4 font-serif animate-fade-in">
+                    <div className="bg-weather-stone p-4 border border-dust-beige/50 rounded-sm flex items-center gap-4 shadow-inner">
                       <div className="w-14 h-14 rounded-full bg-pagoda-wood/10 flex items-center justify-center border border-dust-beige/80">
                         <User className="w-6 h-6 text-slate-basalt" />
                       </div>
@@ -431,21 +480,21 @@ export default function InteractiveMap() {
                     </div>
 
                     <div className="space-y-2 text-sm text-slate-basalt">
-                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm">
+                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm hover:border-dust-beige/50 transition-colors">
                         <Phone className="w-4 h-4 mt-0.5 text-temple-brass" />
                         <div>
                           <span className="block text-[9px] font-sans font-semibold uppercase tracking-wider text-slate-basalt/50">Office Hotline</span>
                           <span className="font-sans font-medium">{selectedDistrictRecord.daoContact || 'N/A'}</span>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm">
+                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm hover:border-dust-beige/50 transition-colors">
                         <Mail className="w-4 h-4 mt-0.5 text-temple-brass" />
                         <div className="truncate">
                           <span className="block text-[9px] font-sans font-semibold uppercase tracking-wider text-slate-basalt/50">Office Hours</span>
                           <span className="font-sans font-medium truncate">{selectedDistrictRecord.daoOfficeHours || 'N/A'}</span>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm">
+                      <div className="flex items-start gap-3 bg-weather-stone/30 p-2.5 border border-dust-beige/20 rounded-sm hover:border-dust-beige/50 transition-colors">
                         <MapPin className="w-4 h-4 mt-0.5 text-temple-brass" />
                         <div>
                           <span className="block text-[9px] font-sans font-semibold uppercase tracking-wider text-slate-basalt/50">HQ & Address</span>
@@ -455,7 +504,7 @@ export default function InteractiveMap() {
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-4 animate-fade-in">
                     <span className="block text-[10px] font-sans font-semibold uppercase tracking-widest text-slate-basalt/60 text-center mb-1">
                       Electoral Constituencies ({districtConstituencies.length})
                     </span>
@@ -464,13 +513,14 @@ export default function InteractiveMap() {
                       {districtConstituencies.map((constObj) => {
                         const rep = representativesList.find(r => r.constituencyId === constObj.id);
                         const partyInfo = PARTIES[rep?.party || 'IND'];
+                        const isActive = selectedConstituencyId === constObj.id || (!selectedConstituencyId && districtConstituencies[0]?.id === constObj.id);
                         return (
                           <div 
                             key={constObj.id} 
                             onClick={() => setSelectedConstituencyId(constObj.id)}
                             className={`p-3.5 border rounded-sm space-y-2 font-serif shadow-sm transition-colors cursor-pointer ${
-                              (selectedConstituencyId === constObj.id || (!selectedConstituencyId && districtConstituencies[0]?.id === constObj.id))
-                                ? 'bg-weather-stone border-temple-brass ring-1 ring-temple-brass' 
+                              isActive
+                                ? 'bg-weather-stone border-temple-brass ring-1 ring-temple-brass shadow-[0_0_10px_rgba(156,122,60,0.2)]' 
                                 : 'bg-weather-stone/60 border-dust-beige/50 hover:border-temple-brass/50'
                             }`}
                           >
@@ -534,7 +584,7 @@ export default function InteractiveMap() {
               <div className="mt-8 relative z-10">
                 <Link
                   to={`/representative/${activeRep.id}`}
-                  className="w-full bg-terraced-pine text-himalayan-mist py-3 px-4 font-semibold hover:bg-temple-brass hover:text-pagoda-wood transition-colors flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm rounded-sm"
+                  className="w-full bg-terraced-pine text-himalayan-mist py-3 px-4 font-semibold hover:bg-temple-brass hover:text-pagoda-wood hover:shadow-[0_0_12px_rgba(156,122,60,0.4)] transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm rounded-sm"
                 >
                   <Award className="w-4 h-4" />
                   View Full Report Card
