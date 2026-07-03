@@ -50,6 +50,8 @@ export const districtsAPI = {
 export const representativesAPI = {
   getAll: (params) => api.get('/representatives', { params }).then(res => res.data),
   getById: (id) => api.get(`/representatives/${id}`).then(res => res.data),
+  submitRating: (id, data) => api.post(`/representatives/${id}/rating`, data).then(res => res.data),
+};
 };
 
 export default api;
