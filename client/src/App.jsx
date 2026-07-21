@@ -5,6 +5,7 @@ import PromiseDetail from './pages/PromiseDetail';
 import ModeratorDashboard from './pages/ModeratorDashboard';
 import CreatePromise from './pages/CreatePromise';
 import InteractiveMap from './pages/InteractiveMap';
+import RepresentativeDirectory from './pages/RepresentativeDirectory';
 import RepresentativeReportCard from './pages/RepresentativeReportCard';
 import RtiAssistant from './pages/RtiAssistant';
 import CivicMap from './pages/CivicMap';
@@ -121,6 +122,10 @@ export default function App() {
                   Interactive Map
                 </Link>
 
+                <Link to="/directory" className="text-xs uppercase tracking-wider font-semibold hover:text-temple-brass transition-colors">
+                  Representatives Directory
+                </Link>
+
                 <Link to="/rti" className="text-xs uppercase tracking-wider font-semibold hover:text-temple-brass transition-colors">
                   RTI Assistant
                 </Link>
@@ -158,14 +163,13 @@ export default function App() {
             </div>
           </header>
 
-
-
           {/* Page Content */}
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<LandingPage setUser={setUser} />} />
               <Route path="/promises" element={<Dashboard user={user} />} />
               <Route path="/map" element={<InteractiveMap />} />
+              <Route path="/directory" element={<RepresentativeDirectory />} />
               <Route path="/rti" element={<RtiAssistant />} />
               <Route path="/civic-map" element={<CivicMap />} />
               <Route path="/promises/:id" element={<PromiseDetail user={user} />} />

@@ -37,4 +37,30 @@ export const moderationAPI = {
   reject: (id) => api.post(`/moderation/${id}/reject`).then(res => res.data),
 };
 
+export const constituenciesAPI = {
+  getAll: (params) => api.get('/constituencies', { params }).then(res => res.data),
+  getById: (id) => api.get(`/constituencies/${id}`).then(res => res.data),
+};
+
+export const districtsAPI = {
+  getAll: (params) => api.get('/districts', { params }).then(res => res.data),
+  getById: (id) => api.get(`/districts/${id}`).then(res => res.data),
+};
+
+export const representativesAPI = {
+  getAll: (params) => api.get('/representatives', { params }).then(res => res.data),
+  getById: (id) => api.get(`/representatives/${id}`).then(res => res.data),
+  submitRating: (id, data) => api.post(`/representatives/${id}/rating`, data).then(res => res.data),
+};
+
+export const budgetAPI = {
+  getAll: (params) => api.get('/budget-projects', { params }).then(res => res.data),
+  create: (data) => api.post('/budget-projects', data).then(res => res.data),
+};
+
+export const complaintsAPI = {
+  getAll: (params) => api.get('/complaints', { params }).then(res => res.data),
+  create: (data) => api.post('/complaints', data).then(res => res.data),
+};
+
 export default api;
