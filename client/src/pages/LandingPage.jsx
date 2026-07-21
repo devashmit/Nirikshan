@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, FileText, Map, BarChart3, AlertTriangle, ArrowRight, CheckCircle2, KeyRound, UserPlus, UserMinus, Landmark } from 'lucide-react';
+import { Shield, FileText, Map, BarChart3, AlertTriangle, ArrowRight, CheckCircle2, KeyRound, UserPlus, UserMinus, Landmark, Users } from 'lucide-react';
 import { authAPI } from '../api';
 
 export default function LandingPage({ setUser }) {
