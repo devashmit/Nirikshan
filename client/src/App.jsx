@@ -158,32 +158,7 @@ export default function App() {
             </div>
           </header>
 
-          {/* Demo Role Switcher (Utility banner for final-year project reviewers) */}
-          <div className="bg-weather-stone/80 border-b border-dust-beige text-xs py-2">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center flex-wrap gap-2">
-              <span className="text-slate-basalt/70 font-semibold">Demo Role Fast-Switcher:</span>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleDemoSignIn('citizen')}
-                  className="bg-himalayan-mist border border-dust-beige px-2 py-0.5 hover:bg-weather-stone text-pagoda-wood font-medium"
-                >
-                  Sign in as Citizen
-                </button>
-                <button
-                  onClick={() => handleDemoSignIn('moderator')}
-                  className="bg-himalayan-mist border border-dust-beige px-2 py-0.5 hover:bg-weather-stone text-pagoda-wood font-medium"
-                >
-                  Sign in as Moderator
-                </button>
-                <button
-                  onClick={() => handleDemoSignIn('admin')}
-                  className="bg-himalayan-mist border border-dust-beige px-2 py-0.5 hover:bg-weather-stone text-pagoda-wood font-medium"
-                >
-                  Sign in as Admin
-                </button>
-              </div>
-            </div>
-          </div>
+
 
           {/* Page Content */}
           <main className="flex-grow">
