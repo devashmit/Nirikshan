@@ -97,51 +97,51 @@ export default function LandingPage({ setUser }) {
 
             {/* Left Column: Vision & Brand */}
             <div className="lg:col-span-7 space-y-8">
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-weather-stone/10 border border-dust-beige/30 text-temple-brass text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/5 border border-white/10 text-temple-brass text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm shadow-inner select-none animate-pulse">
                 <Landmark className="w-4 h-4" /> Official Civic Watchdog Portal
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-5 flex-wrap">
-                  <img src="/logo.png" alt="Nirikshan Logo" className="w-20 h-20 object-contain rounded-full p-2 bg-white border-2 border-temple-brass shadow-2xl transition-transform hover:scale-105 duration-300" />
+                <div className="flex items-center gap-6 flex-wrap">
+                  <img src="/logo.png" alt="Nirikshan Logo" className="w-24 h-24 object-contain rounded-full p-2.5 bg-white border-2 border-temple-brass shadow-2xl transition-transform hover:rotate-6 hover:scale-110 duration-300" />
                   <div>
-                    <h1 className="text-5xl sm:text-6xl font-serif font-extrabold text-himalayan-mist leading-none tracking-tight">
+                    <h1 className="text-5xl sm:text-6xl font-serif font-extrabold text-himalayan-mist leading-none tracking-tight drop-shadow-md">
                       NIRIKSHAN
                     </h1>
-                    <span className="font-sans font-light text-2xl tracking-widest text-temple-brass block mt-1">निरीक्षण</span>
+                    <span className="font-sans font-medium text-2xl tracking-widest text-temple-brass block mt-1">निरीक्षण</span>
                   </div>
                 </div>
 
-                <p className="text-xl text-himalayan-mist/90 font-serif leading-relaxed max-w-2xl border-l-2 border-temple-brass/50 pl-6 italic">
+                <p className="text-xl text-himalayan-mist/95 font-serif leading-relaxed max-w-2xl border-l-4 border-temple-brass pl-6 italic">
                   "Empowering citizens through rigorous tracking of municipal performance, transparent governance monitoring, and active accountability infrastructures across Nepal."
                 </p>
               </div>
 
               {/* Statistics Panel */}
-              <div className="grid grid-cols-3 gap-6 py-6 border-y border-dust-beige/20">
-                <div className="space-y-1">
-                  <div className="text-3xl font-extrabold text-temple-brass font-serif">165</div>
-                  <div className="text-[10px] text-himalayan-mist/60 uppercase tracking-widest font-bold">FPTP Constituencies</div>
+              <div className="grid grid-cols-3 gap-6 py-8 border-y border-white/10">
+                <div className="space-y-1 group cursor-default">
+                  <div className="text-4xl font-extrabold text-temple-brass font-serif transition-transform duration-300 group-hover:scale-105">165</div>
+                  <div className="text-[10px] text-himalayan-mist/70 uppercase tracking-widest font-bold">FPTP Constituencies</div>
                 </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-extrabold text-temple-brass font-serif">100%</div>
-                  <div className="text-[10px] text-himalayan-mist/60 uppercase tracking-widest font-bold">Verified Audit Logs</div>
+                <div className="space-y-1 group cursor-default">
+                  <div className="text-4xl font-extrabold text-temple-brass font-serif transition-transform duration-300 group-hover:scale-105">100%</div>
+                  <div className="text-[10px] text-himalayan-mist/70 uppercase tracking-widest font-bold">Verified Audit Logs</div>
                 </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-extrabold text-temple-brass font-serif">7</div>
-                  <div className="text-[10px] text-himalayan-mist/60 uppercase tracking-widest font-bold">Provinces Mapped</div>
+                <div className="space-y-1 group cursor-default">
+                  <div className="text-4xl font-extrabold text-temple-brass font-serif transition-transform duration-300 group-hover:scale-105">7</div>
+                  <div className="text-[10px] text-himalayan-mist/70 uppercase tracking-widest font-bold">Provinces Mapped</div>
                 </div>
               </div>
 
               {/* Compliance Badges */}
               <div className="flex flex-wrap gap-4 text-sm text-himalayan-mist/70">
-                <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded border border-white/10">
+                <div className="flex items-center gap-2 bg-white/5 hover:bg-white/10 transition-colors px-3.5 py-2 rounded border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-temple-brass" />
-                  <span>ECN Dataset Compliant</span>
+                  <span className="font-medium">ECN Dataset Compliant</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded border border-white/10">
+                <div className="flex items-center gap-2 bg-white/5 hover:bg-white/10 transition-colors px-3.5 py-2 rounded border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-temple-brass" />
-                  <span>RTI Act Framework</span>
+                  <span className="font-medium">RTI Act Framework</span>
                 </div>
               </div>
             </div>
