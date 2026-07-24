@@ -17,14 +17,42 @@ export default function LandingPage({ setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Client-side validations
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setError('Please fill in all credentials.');
+      return;
+    }
+
+    if (activeTab === 'signup') {
+      const trimmedName = name.trim();
+      if (!trimmedName || trimmedName.length < 2) {
+        setError('Please enter a valid name (minimum 2 characters).');
+        return;
+      }
+      if (trimmedPassword.length < 6) {
+        setError('Password must be at least 6 characters.');
+        return;
+      }
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      setError('Please provide a valid email address.');
+      return;
+    }
+
     setLoading(true);
 
     try {
       let response;
       if (activeTab === 'login') {
-        response = await authAPI.login({ email, password });
+        response = await authAPI.login({ email: trimmedEmail, password: trimmedPassword });
       } else if (activeTab === 'signup') {
-        response = await authAPI.register({ name, email, password, role: 'citizen' });
+        response = await authAPI.register({ name: name.trim(), email: trimmedEmail, password: trimmedPassword, role: 'citizen' });
       }
 
       localStorage.setItem('nirikshan_token', response.token);
@@ -33,7 +61,11 @@ export default function LandingPage({ setUser }) {
       navigate('/promises');
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.error || 'Authentication failed. Please verify your credentials.');
+      if (!err.response) {
+        setError('Unable to connect to the backend server. Please verify the backend service is running on http://localhost:5000');
+      } else {
+        setError(err.response?.data?.error || 'Authentication failed. Please verify your credentials.');
+      }
     } finally {
       setLoading(false);
     }
