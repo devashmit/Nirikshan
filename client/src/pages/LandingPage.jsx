@@ -82,25 +82,25 @@ export default function LandingPage({ setUser }) {
       {/* Premium Gradient Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-b from-pagoda-wood to-slate-basalt text-himalayan-mist py-24 sm:py-32 border-b border-temple-brass/30">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#9C7A3C_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
-        
+
         {/* Subtle Nepal Map Background */}
         <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 opacity-[0.12] pointer-events-none select-none flex items-center justify-center lg:justify-end pr-0 lg:pr-8 z-0">
-          <img 
-            src="/nepal-map.svg" 
-            alt="Nepal Map Outline" 
+          <img
+            src="/nepal-map.svg"
+            alt="Nepal Map Outline"
             className="h-full max-h-[90%] w-auto object-contain"
           />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Column: Vision & Brand */}
             <div className="lg:col-span-7 space-y-8">
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-weather-stone/10 border border-dust-beige/30 text-temple-brass text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm">
                 <Landmark className="w-4 h-4" /> Official Civic Watchdog Portal
               </div>
-              
+
               <div className="space-y-6">
                 <div className="flex items-center gap-5 flex-wrap">
                   <img src="/logo.png" alt="Nirikshan Logo" className="w-20 h-20 object-contain rounded-full p-2 bg-white border-2 border-temple-brass shadow-2xl transition-transform hover:scale-105 duration-300" />
@@ -111,7 +111,7 @@ export default function LandingPage({ setUser }) {
                     <span className="font-sans font-light text-2xl tracking-widest text-temple-brass block mt-1">निरीक्षण</span>
                   </div>
                 </div>
-                
+
                 <p className="text-xl text-himalayan-mist/90 font-serif leading-relaxed max-w-2xl border-l-2 border-temple-brass/50 pl-6 italic">
                   "Empowering citizens through rigorous tracking of municipal performance, transparent governance monitoring, and active accountability infrastructures across Nepal."
                 </p>
@@ -150,7 +150,7 @@ export default function LandingPage({ setUser }) {
             <div className="lg:col-span-5 w-full">
               <div className="bg-white text-slate-basalt border-2 border-temple-brass/25 rounded shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-temple-brass/10">
                 <div className="h-2 bg-gradient-to-r from-temple-brass via-pagoda-wood to-temple-brass"></div>
-                
+
                 <div className="p-8">
                   <div className="mb-6">
                     <h3 className="text-2xl font-serif font-bold text-pagoda-wood">Citizen Access Portal</h3>
@@ -238,13 +238,13 @@ export default function LandingPage({ setUser }) {
                   <div className="mt-6 pt-6 border-t border-dust-beige/45">
                     <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-basalt/50 mb-2">Demo Quick Sign-In</span>
                     <div className="flex gap-2 flex-wrap">
-                      <button 
+                      <button
                         onClick={() => handleQuickFill('citizen')}
                         className="text-[11px] bg-himalayan-mist hover:bg-weather-stone text-pagoda-wood font-semibold py-1.5 px-3 rounded border border-dust-beige/45 transition-colors"
                       >
                         Citizen Account
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleQuickFill('moderator')}
                         className="text-[11px] bg-himalayan-mist hover:bg-weather-stone text-pagoda-wood font-semibold py-1.5 px-3 rounded border border-dust-beige/45 transition-colors"
                       >
