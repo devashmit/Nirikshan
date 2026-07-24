@@ -277,64 +277,76 @@ export default function LandingPage({ setUser }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <FileText className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <FileText className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Promise Tracker</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Maintains an audit ledger of campaign commitments and physical progress. Citizens can verify timelines, check status flags (fulfilled, delayed, or broken), and inspect source references.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Promise Tracker</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Maintains an audit ledger of campaign commitments and physical progress. Citizens can verify timelines, check status flags (fulfilled, delayed, or broken), and inspect source references.
-              </p>
             </div>
 
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <Map className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <Map className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Interactive Election Map</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Renders interactive GIS boundaries mapping Nepal's 165 FPTP constituencies with real 2026 election data, providing contact files for elected MPs and local Chief District Officers.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Interactive Election Map</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Renders interactive GIS boundaries mapping Nepal's 165 FPTP constituencies with real 2026 election data, providing contact files for elected MPs and local Chief District Officers.
-              </p>
             </div>
 
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <BarChart3 className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <BarChart3 className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Budget & Progress Visualizer</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Cross-references development budget allocation files with project completion percentages. Identifies allocation anomalies and progress delays in municipal public works.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Budget & Progress Visualizer</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Cross-references development budget allocation files with project completion percentages. Identifies allocation anomalies and progress delays in municipal public works.
-              </p>
             </div>
 
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <AlertTriangle className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <AlertTriangle className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Grievance Heatmap</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Allows anonymous reporting of service breakages or infrastructure failure (water, roads, pollution). Pinpoints reports to visual maps to detect high-frequency municipal issue clusters.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Grievance Heatmap</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Allows anonymous reporting of service breakages or infrastructure failure (water, roads, pollution). Pinpoints reports to visual maps to detect high-frequency municipal issue clusters.
-              </p>
             </div>
 
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <FileText className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <FileText className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">RTI Request Builder</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Assists citizens in compiling official Right to Information request PDFs formatted per the Right to Information Act of Nepal, simplifying municipal queries.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">RTI Request Builder</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Assists citizens in compiling official Right to Information request PDFs formatted per the Right to Information Act of Nepal, simplifying municipal queries.
-              </p>
             </div>
 
-            <div className="bg-white p-8 border border-dust-beige/50 shadow-sm rounded-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group">
-              <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-sm mb-6 group-hover:bg-temple-brass/10 transition-colors">
-                <Users className="w-6 h-6 text-temple-brass" />
+            <div className="bg-white p-8 border border-dust-beige/55 shadow-sm rounded-md hover:shadow-2xl hover:border-temple-brass/35 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-himalayan-mist flex items-center justify-center rounded-md mb-6 group-hover:bg-temple-brass/20 transition-all duration-300">
+                  <Users className="w-6 h-6 text-temple-brass transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Representative Directory</h3>
+                <p className="text-xs text-slate-basalt/80 leading-relaxed">
+                  Synthesizes parliament attendance indexes, legislation sponsorship counts, and community rating reports to build performance report cards for elected officials.
+                </p>
               </div>
-              <h3 className="text-lg font-serif font-bold text-pagoda-wood mb-3">Representative Directory</h3>
-              <p className="text-xs text-slate-basalt/80 leading-relaxed">
-                Synthesizes parliament attendance indexes, legislation sponsorship counts, and community rating reports to build performance report cards for elected officials.
-              </p>
             </div>
           </div>
         </div>
